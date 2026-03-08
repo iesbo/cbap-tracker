@@ -162,7 +162,9 @@
                 const fetchProjects = async () => {
                     setIsDataLoading(true);
                     try {
-                        const docRef = db.collection('users').doc(user.uid);
+                        // Tüm cihazlardan aynı veriye erişmek için sabit bir doküman ID'si kullanıyoruz.
+                        // (user.uid yerine 'global_cbap_data' kullanıldı)
+                        const docRef = db.collection('users').doc('global_cbap_data');
                         const docSnap = await docRef.get();
 
                         if (docSnap.exists) {
@@ -197,7 +199,7 @@
                     if (!user || !initialLoadComplete.current) return;
 
                     try {
-                        await db.collection('users').doc(user.uid).set({
+                        await db.collection('users').doc('global_cbap_data').set({
                             projects: projects,
                             lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                         }, { merge: true });
