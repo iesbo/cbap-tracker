@@ -110,7 +110,7 @@
             const [projects, setProjects] = useState([]);
             const [showAddModal, setShowAddModal] = useState(false);
             const [isAnalyzing, setIsAnalyzing] = useState(false);
-            const [apiKey, setApiKey] = useState(localStorage.getItem('gemini_api_key') || '');
+            const apiKey = "AIzaSyDGAKcqShJms-_uo-j0o_o34EUcKPGIUhU";
 
             // Firebase States
             const [user, setUser] = useState(null);
@@ -231,10 +231,6 @@
 
             // GEMINI API - AI Mentor Analizi İşlemi
             const handleAnalyze = async () => {
-                if (!apiKey) {
-                    alert("Mentor analizi için lütfen sayfanın sağ üst köşesinden Gemini API Anahtarınızı giriniz.");
-                    return;
-                }
                 if (!newProject.title || !newProject.rawDuties || newProject.totalHours <= 0) {
                     alert("Mentor analizinin yapılabilmesi için lütfen Proje Adını, Toplam Saati ve Yaptığınız İşleri (Ham) doldurunuz.");
                     return;
@@ -400,16 +396,6 @@ Görevlerin:
                             <p className="text-slate-500 mt-1 italic uppercase text-xs tracking-widest font-black">AI Destekli Mentor & Kriter Takip Paneli</p>
                         </div>
                         <div className="flex flex-col md:flex-row gap-4 items-center">
-                            <input
-                                type="password"
-                                placeholder="Gemini API Anahtarı"
-                                value={apiKey}
-                                onChange={(e) => {
-                                    setApiKey(e.target.value);
-                                    localStorage.setItem('gemini_api_key', e.target.value);
-                                }}
-                                className="px-4 py-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-500 text-sm shadow-sm w-full md:w-auto"
-                            />
                             <button
                                 onClick={() => setShowAddModal(true)}
                                 className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-indigo-100 hover:shadow-indigo-200 whitespace-nowrap"
