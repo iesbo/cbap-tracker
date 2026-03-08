@@ -142,8 +142,9 @@
                         setUser(firebaseUser);
                         setIsAuthLoading(false);
                     } else {
-                        // Kulanıcı yoksa sessizce kaydet (Anonymous)
-                        auth.signInAnonymously()
+                        // Kulanıcı yoksa sessizce kaydet (Anonymous) ve LOCAL (Kalıcı) hafızayı zorunlu kıl
+                        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                            .then(() => auth.signInAnonymously())
                             .catch(error => {
                                 console.error("Firebase Anonymous Auth Error:", error);
                                 alert("Veritabanı bağlantısı (Giriş) başarısız oldu. Kurulum adımlarını kontrol ediniz.");
